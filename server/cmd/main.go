@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"server/internal/api"
+	"os"
 )
 
 func main() {
@@ -12,9 +13,12 @@ func main() {
 	mux.HandleFunc("/health", api.HealthHandler)
 	mux.HandleFunc("/handleReq", api.HandleReq)
 
-	port := "8080"
-	fmt.Printf("Server starting in port: %s", port)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	fmt.Printf("Server starting in port: %s\n", port)
 
-	log.Fatal(http.ListenAndServe(":"+port, mux))
+	log.Fatal(http.ListenAndServe(":" + port, mux))
 
 }

@@ -32,11 +32,6 @@ func TestServerHealthEndpoint(t *testing.T) {
 	if respBodyJSON["status"] != "ok" {
 		t.Fatalf("expected status ok but got: %v", respBodyJSON["status"])
 	}
-
-
-
-
-
 }
 
 func TestServerHandleReqEndpoint(t *testing.T) {
