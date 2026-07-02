@@ -4,14 +4,17 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"server/internal/api"
 	"os"
+	"server/internal/agent"
+	"server/internal/auth"
+	"server/internal/health"
 )
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/health", api.HealthHandler)
-	mux.HandleFunc("/handleReq", api.HandleReq)
+	mux.HandleFunc("/health", health.HealthHandler)
+	mux.HandleFunc("/handleReq", agent.HandleReq)
+	mux.HandleFunc("/auth", auth.HandleAuth)
 
 	port := os.Getenv("PORT")
 	if port == "" {
